@@ -1,4 +1,4 @@
-@UserDashboardBuilder.Api_HostAddress = http://localhost:5294
+@UserDashboardBuilder.Api_HostAddress = http://localhost:5094
 
 GET {{UserDashboardBuilder.Api_HostAddress}}/weatherforecast/
 Accept: application/json
