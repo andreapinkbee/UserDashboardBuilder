@@ -3,7 +3,11 @@ using System;
 using System.Net.Http;
 using Polly;
 using Polly.Extensions.Http;
-using UserDashboardBuilder.Infrastructure;
+using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Hosting;
+using UserDashboardBuilder.Core;
+using UserDashboardBuilder.Core.Interfaces;
+using UserDashboardBuilder.Infrastructure.Services;
 
 
 namespace UserDashboardBuilder.Api
@@ -25,10 +29,11 @@ namespace UserDashboardBuilder.Api
                 // Configurar base URL desde appsettings
                 client.BaseAddress = new Uri(configuration["ApiSettings:ExternalApiBaseUrl"]);
             })
-            .AddPolicyHandler(GetCircuitBreakerPolicy()); 
+            .AddPolicyHandler(GetCircuitBreakerPolicy());
 
 
-            builder.Services.AddTransient<ExternalApiService>();
+            builder.Services.AddScoped<IExternalApiService, ExternalApiService>();
+            builder.Services.AddScoped<IApiResponseHandlerService, ApiResponseHandlerService>();
 
             // Add services to the container.
 
