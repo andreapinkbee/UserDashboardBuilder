@@ -25,7 +25,7 @@ namespace UserDashboardBuilder.Infrastructure.Services
         {
             var response = await _httpClient.GetAsync("/users");
 
-            // Delegamos el manejo de errores al ApiResponseHandlerService
+            
             return await _apiResponseHandlerService.HandleApiResponseAsync(response);
         }
     }
